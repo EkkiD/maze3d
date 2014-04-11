@@ -1,3 +1,4 @@
 build
-glm
-glfw*
+extern/glm
+extern/glfw*
+extern/glew*

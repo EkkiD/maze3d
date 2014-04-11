@@ -1,5 +1,10 @@
 #include <iostream>
+#include <GL/glew.h>
+
+#include <glfw3.h>
+
 #include <glm/vec3.hpp>
+GLFWwindow* window;
 
 int main(){
     std::cout<<"HELLO, WORLD"<<std::endl;
