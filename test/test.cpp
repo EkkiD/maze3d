@@ -6,11 +6,10 @@
 GLFWwindow* window;
 
 #include <glm/vec3.hpp>
+ 
+#include <common/shader.hpp>
 
-int main(){
-    auto x = 15;
-    std::cout<<x<<std::endl;
-
+int initGL() {
     if (!glfwInit()) {
         std::cerr<<"Failed to init GLFW"<<std::endl;
         return -1;
@@ -30,6 +29,7 @@ int main(){
     }
     glfwMakeContextCurrent(window);
     
+    glewExperimental = true;
     if (glewInit() != GLEW_OK) {
         std::cerr<<"Failed to init GLEW"<<std::endl;
         return -1;
@@ -39,7 +39,53 @@ int main(){
 
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
+    return 0;
+}
+
+int main(){
+    auto x = 15;
+    std::cout<<x<<std::endl;
+
+    int r = initGL(); 
+    if (r < 0) { return -1; }
+
+    GLuint VertexArrayID;
+    glGenVertexArrays(1, &VertexArrayID);
+    glBindVertexArray(VertexArrayID);
+
+    GLuint programID = LoadShaders( "shader.vertexshader", "shader.fragmentshader");
+
+    static const GLfloat g_vertex_buffer_data[] = {
+        -1.0f, -1.0f, 0.0f,
+        1.0f, -1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+    };
+
+    GLuint vertexbuffer;
+    glGenBuffers(1, &vertexbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+
     do {
+        glClear(GL_COLOR_BUFFER_BIT);
+        glUseProgram(programID);
+
+        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+        glVertexAttribPointer(
+            0, // 0
+            3, // size
+            GL_FLOAT, // type
+            GL_FALSE, //normalized?
+            0, //stride
+            (void*)0 //array buffer offset
+        );
+
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDisableVertexAttribArray(0);
+
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     } while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && 

@@ -20,6 +20,11 @@ set (CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 
 add_executable(test 
 	test/test.cpp
+	common/shader.cpp
+	common/shader.hpp
+	
+	test/shader.fragmentshader
+	test/shader.vertexshader
 )
 target_link_libraries(test
 	${ALL_LIBS}
