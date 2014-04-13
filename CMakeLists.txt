@@ -20,6 +20,7 @@ set (CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 
 add_executable(test 
 	test/test.cpp
+    test/opengl.cpp
 	common/shader.cpp
 	common/shader.hpp
 	
