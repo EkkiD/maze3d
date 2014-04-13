@@ -72,12 +72,6 @@ int main(){
 
     glm::mat4 MVP = getMVP();
 
-    static const GLfloat g_vertex_buffer_data[] = {
-        -1.0f, -1.0f, 0.0f,
-        1.0f, -1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-    };
-
     // Vertex Array must be bound before this call. 
     const GLuint vertexarray  = setupVertexArray();
     const GLuint vertexbuffer = setupVertexBuffer(shaderAttr);
