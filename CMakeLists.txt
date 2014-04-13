@@ -27,6 +27,17 @@ add_executable(test
 	test/fragment.glsl
 	test/vertex.glsl
 )
-target_link_libraries(test
-	${ALL_LIBS}
+target_link_libraries(test ${ALL_LIBS})
+
+add_executable(maze 
+	maze/main.cpp
+    maze/opengl.cpp
+    maze/viewer.cpp
+	common/shader.cpp
+	common/shader.hpp
+	
+	maze/fragment.glsl
+	maze/vertex.glsl
 )
+
+target_link_libraries(maze ${ALL_LIBS})

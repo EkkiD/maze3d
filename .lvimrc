@@ -1,0 +1,12 @@
+" ----------------------------------------------------------------------------
+" fswitch
+"
+ augroup mycppfiles
+   au!
+   au BufEnter *.h let b:fswitchdst  = 'cpp,cc,C'
+   au BufEnter *.hpp let b:fswitchdst  = 'cpp,cc,C'
+   au BufEnter *.cpp let b:fswitchdst  = 'h,hpp'
+   au BufEnter *.h let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/'
+   au BufEnter *.hpp let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/'
+ augroup END
+
