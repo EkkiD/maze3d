@@ -23,8 +23,8 @@ add_executable(test
 	common/shader.cpp
 	common/shader.hpp
 	
-	test/shader.fragmentshader
-	test/shader.vertexshader
+	test/fragment.glsl
+	test/vertex.glsl
 )
 target_link_libraries(test
 	${ALL_LIBS}
