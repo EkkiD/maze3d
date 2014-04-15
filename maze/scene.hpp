@@ -17,6 +17,12 @@ public:
         }
     }
 
+    void render() {
+        for (const auto& n: nodes) {
+            n->render();
+        }
+    }
+
 private:
     std::vector<std::unique_ptr<Node>> nodes;
 };

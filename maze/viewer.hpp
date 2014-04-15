@@ -1,9 +1,10 @@
 #ifndef __VIEWER_HPP__
 #define __VIEWER_HPP__
-#include <test/opengl.hpp>
+#include <maze/opengl.hpp>
 #include <GL/glew.h>
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
+#include <maze/scene.hpp>
 
 constexpr static const GLfloat g_vertex_buffer_data[] = {
     -1.0f, -1.0f, 0.0f,
@@ -13,17 +14,19 @@ constexpr static const GLfloat g_vertex_buffer_data[] = {
 
 class Viewer {
 public:
+    int init();
     int run();
+    void setScene(Scene s) {
+        scene = std::move(s);
+    }
 private:
-        
-    GLuint setupVertexArray();
 
     glm::mat4 getMVP();
 
-    GLuint setupVertexBuffer(const GLuint shaderAttr);
+    void cleanup(GLuint programID);
 
-    void cleanup(GLuint vertexbuffer, GLuint programID, GLuint vertexarray);
-
+    Scene scene;
+    GLFWwindow* window;
 };
 
 #endif

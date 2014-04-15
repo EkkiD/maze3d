@@ -33,6 +33,7 @@ add_executable(maze
 	maze/main.cpp
     maze/opengl.cpp
     maze/viewer.cpp
+    maze/cube.cpp
 	common/shader.cpp
 	common/shader.hpp
 	

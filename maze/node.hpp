@@ -2,6 +2,7 @@
 #define __NODE_HPP__
 #include<iostream>
 
+static int next_id = 0;
 class Node {
 public:
     Node():id(next_id){ ++next_id; };
@@ -10,10 +11,10 @@ public:
         std::cout<<id<<std::endl;
     }
 
+    virtual void render() {};
+
 private:
-    static int next_id;
     int id;
 };
-int Node::next_id = 0;
 
 #endif
