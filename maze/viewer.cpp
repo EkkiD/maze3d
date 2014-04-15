@@ -23,12 +23,11 @@ int Viewer::run(){
     glm::mat4 MVP = getMVP();
 
     do {
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(programID);
 
         glUniformMatrix4fv(MVPId, 1, GL_FALSE, &MVP[0][0]);
 
-        //glDrawArrays(GL_TRIANGLES, 0, 3);
         scene.render();
 
         glfwSwapBuffers(window);
