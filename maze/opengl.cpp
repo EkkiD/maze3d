@@ -114,8 +114,6 @@ GLuint initCube() {
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_index);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
 
     glBindVertexArray(0);
     return vao;
