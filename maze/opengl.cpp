@@ -83,6 +83,9 @@ GLuint initCube() {
         // bottom
         4, 5, 1,
         1, 0, 4,
+        //left
+        4, 0, 3,
+        3, 7, 4,
         //right
         1, 5, 6,
         6, 2, 1,
