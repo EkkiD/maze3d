@@ -8,6 +8,9 @@ using namespace glm;
  
 #include <common/shader.hpp>
 
+
+GLuint G_MVP_ID = 0;
+
 int Viewer::init(){
     window = initGL(); 
     if (window == nullptr) { return -1; }
@@ -16,7 +19,7 @@ int Viewer::init(){
 
 int Viewer::run(){
     GLuint programID = LoadShaders( "vertex.glsl", "fragment.glsl");
-    const GLuint MVPId = glGetUniformLocation(programID, "MVP");
+    const GLuint MVPId = G_MVP_ID = glGetUniformLocation(programID, "MVP");
 
     glm::mat4 MVP = getMVP();
 

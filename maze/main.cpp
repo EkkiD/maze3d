@@ -14,6 +14,10 @@ int main(){
     auto c = std::unique_ptr<Node>(new Cube());
     scene.add_node(std::move(c));
 
+    auto c2 = std::unique_ptr<Node>(new Cube());
+    c2->translate(-1.0f, -1.0f, -1.0f);
+    scene.add_node(std::move(c2));
+
     scene.print_nodes();
     viewer.setScene(std::move(scene));
     return viewer.run();

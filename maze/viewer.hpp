@@ -12,6 +12,8 @@ constexpr static const GLfloat g_vertex_buffer_data[] = {
     0.0f, 1.0f, 0.0f,
 };
 
+extern GLuint G_MVP_ID;
+
 class Viewer {
 public:
     int init();
