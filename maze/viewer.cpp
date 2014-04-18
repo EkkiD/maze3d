@@ -26,7 +26,7 @@ int Viewer::run(){
 
         glUniformMatrix4fv(MVPId, 1, GL_FALSE, &MVP[0][0]);
 
-        scene.render();
+        scene.render(MVP);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

@@ -16,9 +16,9 @@ public:
         }
     }
 
-    void render() {
+    void render(glm::mat4 MVP) {
         for (const auto& n: nodes) {
-            n->render();
+            n->render(MVP);
         }
     }
 
