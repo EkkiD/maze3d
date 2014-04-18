@@ -1,0 +1,10 @@
+#include <GL/glew.h>
+#include <maze/node.hpp>
+
+void Node::render() {
+    glBindVertexArray(m_vao);
+    // TODO: unhardcode 30
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0);
+
+    glBindVertexArray(0);
+}
