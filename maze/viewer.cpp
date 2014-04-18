@@ -15,8 +15,6 @@ int Viewer::init(){
 }
 
 int Viewer::run(){
-    const GLuint shaderAttr = 0;
-
     GLuint programID = LoadShaders( "vertex.glsl", "fragment.glsl");
     const GLuint MVPId = glGetUniformLocation(programID, "MVP");
 

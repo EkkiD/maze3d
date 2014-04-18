@@ -6,11 +6,9 @@
 
 class Cube: public Node {
 public:
-    Cube(GLuint vao):vao(vao){};
     virtual void render();
 
 private:
-    GLuint vao;
 };
 
 #endif

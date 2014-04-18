@@ -4,6 +4,9 @@
 #include <glfw3.h>
 GLFWwindow* initGL(); 
 
-GLuint initCube();
+void initPrimitives();
+void initCube();
+
+extern GLuint G_CUBE_VAO;
 
 #endif
