@@ -3,12 +3,11 @@
 #include <GL/glew.h>
 #include<iostream>
 #include <maze/node.hpp>
+#include <maze/opengl.hpp>
 
 class Cube: public Node {
 public:
-    virtual void render();
-
-private:
+    Cube():Node(G_CUBE_VAO){};
 };
 
 #endif

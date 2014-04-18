@@ -2,7 +2,6 @@
 #define __SCENE_HPP__
 #include <memory>
 #include <vector>
-
 #include <maze/node.hpp>
 
 class Scene {

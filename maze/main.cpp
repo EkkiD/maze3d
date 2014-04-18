@@ -9,8 +9,6 @@ int main(){
     int r = viewer.init();
     if (r < 0) { return -1; }
 
-    initCube();
-
     auto scene = Scene();
 
     auto c = std::unique_ptr<Node>(new Cube());

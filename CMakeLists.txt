@@ -34,8 +34,8 @@ add_executable(maze
     maze/opengl.cpp
     maze/viewer.cpp
     maze/cube.cpp
+    maze/node.cpp
 	common/shader.cpp
-	common/shader.hpp
 	
 	maze/fragment.glsl
 	maze/vertex.glsl
