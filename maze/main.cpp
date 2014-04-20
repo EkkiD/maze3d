@@ -12,6 +12,7 @@ int main(){
     auto scene = Scene();
 
     auto c = std::unique_ptr<Node>(new Cube());
+    c->scale(0.2f, 0.4f, 0.8f);
     scene.add_node(std::move(c));
 
     auto c2 = std::unique_ptr<Node>(new Cube());

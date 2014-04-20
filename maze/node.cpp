@@ -21,3 +21,7 @@ void Node::render(glm::mat4 MVP) {
 void Node::translate(float x, float y, float z) {
     m_transform = m_transform * glm::translate(m_transform, glm::vec3(x, y, z));
 }
+
+void Node::scale(float x, float y, float z) {
+    m_transform = m_transform * glm::scale(m_transform, glm::vec3(x, y, z));
+}

@@ -21,6 +21,7 @@ public:
 
     void translate(float x, float y, float z);
 
+    void scale(float x, float y, float z);
 private:
     GLuint m_vao;
     int id;
