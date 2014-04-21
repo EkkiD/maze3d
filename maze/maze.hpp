@@ -7,7 +7,10 @@
 class Cell {
 public:
 
-
+private:
+    int m_walls;
+    int m_row;
+    int m_col;
 };
 
 class Maze {

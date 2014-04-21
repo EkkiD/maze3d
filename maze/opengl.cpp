@@ -24,15 +24,15 @@ void initCube() {
 
     const GLfloat cube_colors[] = {
         // front
-        1.0f,  0.0f,  0.0,
-        0.0f,  1.0f,  0.0,
-        0.0f,  0.0f,  1.0,
-        1.0f,  1.0f,  1.0,
+        1.0f,  0.0f,  0.0f,
+        0.0f,  1.0f,  0.0f,
+        0.0f,  0.0f,  1.0f,
+        1.0f,  1.0f,  1.0f,
         //back
-        1.0f,  0.0f,  0.0,
-        0.0f,  1.0f,  0.0,
-        0.0f,  0.0f,  1.0,
-        1.0f,  1.0f,  1.0,
+        1.0f,  0.0f,  0.0f,
+        0.0f,  1.0f,  0.0f,
+        0.0f,  0.0f,  1.0f,
+        1.0f,  1.0f,  1.0f,
     };
 
     const GLushort cube_indices[] = {
