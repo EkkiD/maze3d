@@ -29,7 +29,7 @@ int Viewer::run(){
 
         glUniformMatrix4fv(MVPId, 1, GL_FALSE, &MVP[0][0]);
 
-        scene.render(MVP);
+        m_maze.render(MVP);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -42,7 +42,7 @@ int Viewer::run(){
 
 glm::mat4 Viewer::getMVP() {
     glm::mat4 proj = glm::perspective(1.04719f, 4.0f/4.0f, 0.1f, 1000.0f);
-    glm::mat4 view = glm::lookAt(glm::vec3(4,3,-3), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    glm::mat4 view = glm::lookAt(glm::vec3(11,11,11), glm::vec3(0,0,0), glm::vec3(0,1,0));
     glm::mat4 model = glm::mat4(1.0f);
     return proj * view * model;
 }

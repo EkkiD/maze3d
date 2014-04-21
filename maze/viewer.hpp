@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
-#include <maze/scene.hpp>
+#include <maze/maze.hpp>
 #include <maze/opengl.hpp>
 
 constexpr static const GLfloat g_vertex_buffer_data[] = {
@@ -18,8 +18,8 @@ class Viewer {
 public:
     int init();
     int run();
-    void setScene(Scene s) {
-        scene = std::move(s);
+    void setMaze(Maze s) {
+        m_maze = std::move(s);
     }
 private:
 
@@ -27,7 +27,7 @@ private:
 
     void cleanup(GLuint programID);
 
-    Scene scene;
+    Maze m_maze;
     GLFWwindow* window;
 };
 
