@@ -148,10 +148,11 @@ void initCube() {
 
     // skip normals for now. We'll come back to them.
     // TODO: make this one glGenBuffers call, filling into an array
-    GLuint vbo_verts, vbo_colors, vbo_index;
+    GLuint vbo_verts, vbo_colors, vbo_index, vbo_normals;
     glGenBuffers(1, &vbo_verts);
     glGenBuffers(1, &vbo_colors);
     glGenBuffers(1, &vbo_index);
+    glGenBuffers(1, &vbo_normals);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_verts);
     glBufferData(GL_ARRAY_BUFFER, sizeof(cube_verts), cube_verts, GL_STATIC_DRAW);
@@ -165,6 +166,12 @@ void initCube() {
     // TODO: un-hardcode the 0 here
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1 , 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_normals);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(cube_normals), cube_normals, GL_STATIC_DRAW);
+    // TODO: un-hardcode the 0 here
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2 , 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_index);
