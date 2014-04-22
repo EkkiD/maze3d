@@ -1,9 +1,6 @@
 #include <maze/maze.hpp>
 #include <maze/wall.hpp>
 
-int Maze::NUM_ROWS = 10;
-int Maze::NUM_COLS = 10;
-
 Cell::Cell(int row, int col): 
     m_row(row), 
     m_col(col),

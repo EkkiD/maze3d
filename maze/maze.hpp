@@ -49,8 +49,8 @@ public:
     }
 
 private:
-    static int NUM_ROWS;
-    static int NUM_COLS;
+    static int const NUM_ROWS = 10;
+    static int const NUM_COLS = 10;
     std::vector<std::unique_ptr<Node>> nodes;
     std::vector<Cell> m_cells;
 };

@@ -119,6 +119,8 @@ GLFWwindow* initGL() {
     glClearColor(0.4f, 0.4f, 0.4f, 0.0f);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
+    
+    glCullFace(GL_BACK);
 
     initPrimitives();
     return window;
