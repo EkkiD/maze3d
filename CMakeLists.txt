@@ -35,6 +35,8 @@ add_executable(maze
     maze/viewer.cpp
     maze/cube.cpp
     maze/node.cpp
+    maze/maze.cpp
+    maze/wall.cpp
 	common/shader.cpp
 	
 	maze/fragment.glsl

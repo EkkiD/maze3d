@@ -11,14 +11,6 @@ int main(){
 
     auto maze = Maze();
 
-    auto c = std::unique_ptr<Node>(new Cube());
-    c->scale(0.2f, 0.4f, 0.8f);
-    maze.add_node(std::move(c));
-
-    auto c2 = std::unique_ptr<Node>(new Cube());
-    c2->translate(-1.0f, -1.0f, -1.0f);
-    maze.add_node(std::move(c2));
-
     maze.print_nodes();
     viewer.setMaze(std::move(maze));
     return viewer.run();
