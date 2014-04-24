@@ -13,7 +13,7 @@ class Cell {
 public:
     Cell(int row, int col);
 
-    void render(glm::mat4 MVP) const;
+    void render(glm::mat4 MVP, glm::mat4 M) const;
 
 private:
     char m_wall_bitmask;
@@ -38,13 +38,13 @@ public:
         }
     }
 
-    void render(glm::mat4 MVP) const {
+    void render(glm::mat4 MVP, glm::mat4 M) const {
         for (const auto& n: nodes) {
             n->render(MVP);
         }
 
         for (const auto c: m_cells) {
-            c.render(MVP);
+            c.render(MVP, M);
         }
     }
 

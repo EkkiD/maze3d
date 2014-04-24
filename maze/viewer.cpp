@@ -22,9 +22,9 @@ int Viewer::init(){
 
 int Viewer::run(){
     GLuint programID = LoadShaders( "vertex.glsl", "fragment.glsl");
-    const GLuint G_MVP_ID = glGetUniformLocation(programID, "MVP");
-    const GLuint G_V_ID = glGetUniformLocation(programID, "V");
-    const GLuint G_M_ID = glGetUniformLocation(programID, "M");
+    G_MVP_ID = glGetUniformLocation(programID, "MVP");
+    G_V_ID = glGetUniformLocation(programID, "V");
+    G_M_ID = glGetUniformLocation(programID, "M");
 
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -34,7 +34,7 @@ int Viewer::run(){
         glUniformMatrix4fv(G_V_ID, 1, GL_FALSE, &V[0][0]);
         glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &M[0][0]);
 
-        m_maze.render(MVP);
+        m_maze.render(MVP, M);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

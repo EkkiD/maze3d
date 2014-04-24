@@ -7,7 +7,7 @@
 
 class Wall {
 public:
-    void render(glm::mat4 MVP) const;
+    void render(glm::mat4 MVP, glm::mat4 M) const;
 
     void translate(float x, float y, float z);
     void scale(float x, float y, float z);

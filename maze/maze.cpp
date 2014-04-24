@@ -14,9 +14,9 @@ Cell::Cell(int row, int col):
     n_wall.scale(0.8, 1.0, 0.1);
 }
 
-void Cell::render(glm::mat4 MVP) const {
-    w_wall.render(MVP);
-    n_wall.render(MVP);
+void Cell::render(glm::mat4 MVP, glm::mat4 M) const {
+    w_wall.render(MVP, M);
+    n_wall.render(MVP, M);
 }
 
 
