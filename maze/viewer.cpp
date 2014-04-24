@@ -25,6 +25,8 @@ int Viewer::run(){
     G_MVP_ID = glGetUniformLocation(programID, "MVP");
     G_V_ID = glGetUniformLocation(programID, "V");
     G_M_ID = glGetUniformLocation(programID, "M");
+    GLuint lightPosId = glGetUniformLocation(programID, "lightPosition_world");
+    glm::vec3 lightPos = glm::vec3(11, 11, 11);
 
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -33,6 +35,7 @@ int Viewer::run(){
         glUniformMatrix4fv(G_MVP_ID, 1, GL_FALSE, &MVP[0][0]);
         glUniformMatrix4fv(G_V_ID, 1, GL_FALSE, &V[0][0]);
         glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &M[0][0]);
+        glUniform3f(lightPosId, lightPos.x, lightPos.y, lightPos.z);
 
         m_maze.render(MVP, M);
 
