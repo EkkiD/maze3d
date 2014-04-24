@@ -13,6 +13,8 @@ constexpr static const GLfloat g_vertex_buffer_data[] = {
 };
 
 extern GLuint G_MVP_ID;
+extern GLuint G_V_ID;
+extern GLuint G_M_ID;
 
 class Viewer {
 public:
@@ -23,7 +25,11 @@ public:
     }
 private:
 
-    glm::mat4 getMVP();
+    void setMVP();
+    glm::mat4 MVP;
+    glm::mat4 P;
+    glm::mat4 V;
+    glm::mat4 M;
 
     void cleanup(GLuint programID);
 

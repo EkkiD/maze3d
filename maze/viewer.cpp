@@ -10,24 +10,29 @@ using namespace glm;
 
 
 GLuint G_MVP_ID = 0;
+GLuint G_M_ID = 0;
+GLuint G_V_ID = 0;
 
 int Viewer::init(){
     window = initGL(); 
     if (window == nullptr) { return -1; }
+    setMVP();
     return 0;
 }
 
 int Viewer::run(){
     GLuint programID = LoadShaders( "vertex.glsl", "fragment.glsl");
-    const GLuint MVPId = G_MVP_ID = glGetUniformLocation(programID, "MVP");
-
-    glm::mat4 MVP = getMVP();
+    const GLuint G_MVP_ID = glGetUniformLocation(programID, "MVP");
+    const GLuint G_V_ID = glGetUniformLocation(programID, "V");
+    const GLuint G_M_ID = glGetUniformLocation(programID, "M");
 
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(programID);
 
-        glUniformMatrix4fv(MVPId, 1, GL_FALSE, &MVP[0][0]);
+        glUniformMatrix4fv(G_MVP_ID, 1, GL_FALSE, &MVP[0][0]);
+        glUniformMatrix4fv(G_V_ID, 1, GL_FALSE, &V[0][0]);
+        glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &M[0][0]);
 
         m_maze.render(MVP);
 
@@ -40,13 +45,12 @@ int Viewer::run(){
     return 0;
 }
 
-glm::mat4 Viewer::getMVP() {
-    glm::mat4 proj = glm::perspective(1.04719f, 4.0f/4.0f, 0.1f, 1000.0f);
-    glm::mat4 view = glm::lookAt(glm::vec3(11,11,11), glm::vec3(0,0,0), glm::vec3(0,1,0));
-    glm::mat4 model = glm::mat4(1.0f);
-    return proj * view * model;
+void Viewer::setMVP() {
+    P = glm::perspective(1.04719f, 4.0f/4.0f, 0.1f, 1000.0f);
+    V = glm::lookAt(glm::vec3(11,11,11), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    M = glm::mat4(1.0f);
+    MVP = P * V * M;
 }
-
 
 void Viewer::cleanup(GLuint programID) {
     glDeleteProgram(programID);
