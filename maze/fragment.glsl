@@ -16,7 +16,7 @@ uniform vec3 LightPosition_world;
 void main() {
     // TODO: move to C++ 
     vec3 LightColor = vec3(1, 1, 1);
-    float LightPower = 50.0f;
+    float LightPower = 400.0f;
 
     // Material properties
     vec3 MaterialDiffuseColor = fragmentColor;
@@ -42,6 +42,6 @@ void main() {
     float cosAlpha = clamp( dot(E, R), 0, 1);
 
     color = MaterialAmbientColor + 
-            MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance2) + 0;
-            //MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha, 5) / (distance2);
+            MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance2) +
+            MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha, 5) / (distance2);
 }

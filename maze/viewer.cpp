@@ -25,8 +25,8 @@ int Viewer::run(){
     G_MVP_ID = glGetUniformLocation(programID, "MVP");
     G_V_ID = glGetUniformLocation(programID, "V");
     G_M_ID = glGetUniformLocation(programID, "M");
-    GLuint lightPosId = glGetUniformLocation(programID, "lightPosition_world");
-    glm::vec3 lightPos = glm::vec3(11, 11, 11);
+    GLuint lightPosId = glGetUniformLocation(programID, "LightPosition_world");
+    glm::vec3 lightPos = glm::vec3(11.0f, 11.0f, 11.0f);
 
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

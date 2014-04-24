@@ -32,8 +32,8 @@ void main() {
     LightDirection_camera = lightPosition_camera + EyeDirection_camera;
 
     // 
-    mat4 invTransM = transpose(inverse(M));
-    Normal_camera = (V * invTransM * vec4(vertexNormal_modelspace, 0)).xyz;
+    mat4 invTransVM = inverse(transpose(V * M));
+    Normal_camera = (invTransVM * vec4(vertexNormal_modelspace, 0)).xyz;
 
     fragmentColor = vertexColor;
 }
