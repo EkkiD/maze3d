@@ -12,6 +12,7 @@ int main(){
     auto maze = Maze();
 
     maze.print_nodes();
+    maze.tearDown(3, 7, true);
     viewer.setMaze(std::move(maze));
     return viewer.run();
 }

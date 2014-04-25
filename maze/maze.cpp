@@ -12,11 +12,20 @@ Cell::Cell(int row, int col):
 
     n_wall.translate(col - 5 + 0.1, 0, row - 5 - 0.05);
     n_wall.scale(0.8, 1.0, 0.1);
+    m_wall_bitmask = NORTH | SOUTH | EAST | WEST;
 }
 
 void Cell::render(glm::mat4 MVP, glm::mat4 M) const {
-    w_wall.render(MVP, M);
-    n_wall.render(MVP, M);
+    if (m_wall_bitmask & WEST) {
+        w_wall.render(MVP, M);
+    }
+    if (m_wall_bitmask & NORTH) {
+        n_wall.render(MVP, M);
+    }
+}
+
+void Cell::tearDown(int direction) {
+    m_wall_bitmask ^= direction;
 }
 
 
@@ -27,4 +36,9 @@ Maze::Maze() {
             m_cells.push_back(Cell(i, j));
         }
     }
+}
+
+void Maze::tearDown(int row, int col, bool north) {
+    int index = (row * NUM_COLS) + col;
+    m_cells[index].tearDown(north ? NORTH : WEST);
 }

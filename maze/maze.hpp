@@ -9,11 +9,18 @@
 #include <maze/node.hpp>
 #include <maze/wall.hpp>
 
+const char NORTH = 1;
+const char EAST = 2;
+const char SOUTH = 4;
+const char WEST = 8;
+
 class Cell {
 public:
     Cell(int row, int col);
 
     void render(glm::mat4 MVP, glm::mat4 M) const;
+
+    void tearDown(int direction);
 
 private:
     char m_wall_bitmask;
@@ -48,6 +55,7 @@ public:
         }
     }
 
+    void tearDown(int row, int col, bool north);
 private:
     static int const NUM_ROWS = 10;
     static int const NUM_COLS = 10;

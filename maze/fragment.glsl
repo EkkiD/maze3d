@@ -12,6 +12,8 @@ out vec3 color;
 
 // 
 uniform vec3 LightPosition_world;
+uniform vec3 LightColor;
+uniform float LightPower;
 
 void main() {
     // TODO: move to C++ 
