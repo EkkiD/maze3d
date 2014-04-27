@@ -3,7 +3,8 @@
 #include <maze/maze.hpp>
 #include <maze/node.hpp>
 #include <maze/cube.hpp>
-#include <maze/opengl.hpp>
+#include <maze/generator.hpp>
+
 int main(){
     auto viewer = Viewer();
     int r = viewer.init();
@@ -13,6 +14,10 @@ int main(){
 
     maze.print_nodes();
     maze.tearDown(3, 7, true);
+
     viewer.setMaze(std::move(maze));
+
+    auto generator = DFSGenerator(viewer.getRawMaze());
+
     return viewer.run();
 }

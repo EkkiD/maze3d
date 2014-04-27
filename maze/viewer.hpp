@@ -20,8 +20,12 @@ class Viewer {
 public:
     int init();
     int run();
-    void setMaze(Maze s) {
+    void setMaze(Maze&& s) {
         m_maze = std::move(s);
+    }
+
+    Maze * getRawMaze(){
+        return &m_maze;
     }
 private:
 
