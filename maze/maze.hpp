@@ -9,10 +9,7 @@
 #include <maze/node.hpp>
 #include <maze/wall.hpp>
 
-const char NORTH = 1;
-const char EAST = 2;
-const char SOUTH = 4;
-const char WEST = 8;
+#include <maze/common.hpp>
 
 class Cell {
 public:
