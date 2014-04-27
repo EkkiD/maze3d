@@ -13,11 +13,13 @@ int main(){
     auto maze = Maze();
 
     maze.print_nodes();
-    maze.tearDown(3, 7, true);
 
     viewer.setMaze(std::move(maze));
 
     auto generator = DFSGenerator(viewer.getRawMaze());
 
+    generator.setStartLoc(GridPoint(5, 5));
+    while (generator.step()) {
+    }
     return viewer.run();
 }

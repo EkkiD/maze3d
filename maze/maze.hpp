@@ -19,12 +19,23 @@ public:
 
     void tearDown(int direction);
 
+    void setStatus(STATUS stat) { m_status = stat; }
+
+    STATUS getStatus() { return m_status; }
+
+    bool isUntouched() { return m_status == UNTOUCHED; }
+
+    bool isStanding(unsigned char direction) {
+        return (m_wall_bitmask & direction) != 0 ;
+    }
+
 private:
-    char m_wall_bitmask;
+    unsigned char m_wall_bitmask;
     int m_row;
     int m_col;
     Wall n_wall;
     Wall w_wall;
+    STATUS m_status;
 };
 
 class Maze {
@@ -53,9 +64,13 @@ public:
     }
 
     void tearDown(int row, int col, bool north);
+
+    Cell* getCell(int row, int col) {
+        int index = row * NUM_COLS + col; 
+        return &(m_cells[index]);
+    }
+
 private:
-    static int const NUM_ROWS = 10;
-    static int const NUM_COLS = 10;
     std::vector<std::unique_ptr<Node>> nodes;
     std::vector<Cell> m_cells;
 };

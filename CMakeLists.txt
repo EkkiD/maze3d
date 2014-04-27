@@ -30,6 +30,7 @@ add_executable(test
 target_link_libraries(test ${ALL_LIBS})
 
 add_executable(maze 
+	maze/common.cpp
 	maze/main.cpp
     maze/opengl.cpp
     maze/viewer.cpp
