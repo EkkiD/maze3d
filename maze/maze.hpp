@@ -58,8 +58,12 @@ public:
             n->render(MVP);
         }
 
-        for (const auto c: m_cells) {
+        for (const auto& c: m_cells) {
             c.render(MVP, M);
+        }
+
+        for (const auto& side_wall: m_side_walls) {
+            side_wall.render(MVP, M);
         }
     }
 
@@ -73,6 +77,7 @@ public:
 private:
     std::vector<std::unique_ptr<Node>> nodes;
     std::vector<Cell> m_cells;
+    std::vector<Wall> m_side_walls;
 };
 
 #endif

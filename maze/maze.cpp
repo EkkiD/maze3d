@@ -36,6 +36,18 @@ Maze::Maze() {
             m_cells.push_back(Cell(i, j));
         }
     }
+
+    for (int row = 0; row < NUM_ROWS; row++) {
+        m_side_walls.push_back(Wall());
+        m_side_walls.back().translate(NUM_COLS - 5 - 0.05, 0, row - 5 + 0.1);
+        m_side_walls.back().scale(0.1, 1.0, 0.8);
+    }
+
+    for (int col = 0; col < NUM_COLS; col++) {
+        m_side_walls.push_back(Wall());
+        m_side_walls.back().translate(col - 5 - 0.05, 0, NUM_ROWS - 5 + 0.1);
+        m_side_walls.back().scale(0.8, 1.0, 0.1);
+    }
 }
 
 void Maze::tearDown(int row, int col, bool north) {
