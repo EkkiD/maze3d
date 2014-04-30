@@ -28,6 +28,7 @@ public:
         return &m_maze;
     }
 private:
+    static void onMouseButton(GLFWwindow* window, int button, int action, int mods);
 
     void setMVP();
     glm::mat4 MVP;

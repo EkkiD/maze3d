@@ -17,7 +17,14 @@ int Viewer::init(){
     window = initGL(); 
     if (window == nullptr) { return -1; }
     setMVP();
+    glfwSetMouseButtonCallback(window, onMouseButton);
+    glfwSetWindowUserPointer(window, (void*)this);
     return 0;
+}
+
+void Viewer::onMouseButton(GLFWwindow* window, int button, int action, int mods){
+    auto viewer = static_cast<Viewer*>(glfwGetWindowUserPointer(window));
+    std::cout<<button<<" "<<action<<" "<<mods<<std::endl;
 }
 
 int Viewer::run(){
