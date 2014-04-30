@@ -29,6 +29,7 @@ public:
     }
 private:
     static void onMouseButton(GLFWwindow* window, int button, int action, int mods);
+    static void onMouseMove(GLFWwindow* window, double x, double y);
 
     void setMVP();
     glm::mat4 MVP;
