@@ -9,11 +9,12 @@ using namespace glm;
 #include <common/shader.hpp>
 
 
+
 GLuint G_MVP_ID = 0;
 GLuint G_M_ID = 0;
 GLuint G_V_ID = 0;
 
-int Viewer::init(){
+int Viewer::init() {
     window = initGL(); 
     if (window == nullptr) { return -1; }
     setMVP();
