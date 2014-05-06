@@ -11,6 +11,7 @@ public:
         m_screenSize(screen_size)
     {
         m_currentQuat = glm::quat();
+        m_radius = std::min( (float)screen_size.x / 2, (float)screen_size.y / 2 );
     }
 
     void mouseDown(const glm::ivec2 &mouse_pos) {
@@ -27,22 +28,6 @@ public:
         m_currentQuat = glm::normalize(m_currentQuat);
     }
 
-    glm::vec3 projectPoint(const glm::ivec2 &point) {
-        glm::vec3 result;
-        result.x = (point.x - 0) / (0.8 * 2);
-        result.y = (point.y - 0) / (0.8 * 2);
-        result.z = 0.0f;
-
-        float mag = glm::length2(result);
-        if(mag > 1.0f) {
-            result = glm::normalize(result);
-        } else {
-            result.z = sqrt(1.0f - mag);
-            result = glm::normalize(result);
-        }
-        return result;
-    }
-
     glm::mat4 rotation() {
         return glm::mat4_cast(m_currentQuat);
     }
@@ -50,6 +35,24 @@ private:
     glm::ivec2 m_screenSize;
     glm::ivec2 m_initialMousePos;
     glm::quat m_currentQuat, m_initialQuat;
+    float m_radius;
+
+    glm::vec3 projectPoint(const glm::ivec2 &point) {
+        glm::vec3 result;
+        result.x = (point.x - 0) / (m_radius* 2);
+        result.y = (point.y - 0) / (m_radius* 2);
+        result.z = 0.0f;
+
+        float mag = glm::length2(result);
+        if(mag > 1.0f) {
+            result = glm::normalize(result);
+        } else {
+            result.z = sqrtf(1.0f - mag);
+            result = glm::normalize(result);
+        }
+        return result;
+    }
+
 };
 
 

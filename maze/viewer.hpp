@@ -19,7 +19,7 @@ extern GLuint G_M_ID;
 
 class Viewer {
 public:
-    Viewer() : m_trackball(glm::ivec2(1024, 768)) {};
+    Viewer() : m_trackball(glm::ivec2(1024, 768)), m_mouseDown(false) {};
     int init();
     int run();
     void setMaze(Maze&& s) {
@@ -44,6 +44,7 @@ private:
     Maze m_maze;
     GLFWwindow* window;
     Trackball m_trackball;
+    bool m_mouseDown;
 };
 
 #endif

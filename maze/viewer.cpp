@@ -9,7 +9,6 @@ using namespace glm;
 #include <common/shader.hpp>
 
 
-
 GLuint G_MVP_ID = 0;
 GLuint G_M_ID = 0;
 GLuint G_V_ID = 0;
@@ -26,12 +25,17 @@ int Viewer::init() {
 
 void Viewer::onMouseButton(GLFWwindow* window, int button, int action, int mods){
     auto viewer = static_cast<Viewer*>(glfwGetWindowUserPointer(window));
-    std::cout<<button<<" "<<action<<" "<<mods<<std::endl;
+    double x, y;
+    glfwGetCursorPos(window, &x, &y);
+    viewer->m_trackball.mouseDown(glm::ivec2((int)x, (int)y));
+    viewer->m_mouseDown = (action == GLFW_PRESS);
 }
 
 void Viewer::onMouseMove(GLFWwindow* window, double x, double y){
     auto viewer = static_cast<Viewer*>(glfwGetWindowUserPointer(window));
-    std::cout<<x<<" "<<y<<" "<<std::endl;
+    if (viewer->m_mouseDown) {
+        viewer->m_trackball.mouseMove(glm::ivec2((int)x, (int)y));
+    }
 }
 
 int Viewer::run(){
@@ -51,7 +55,9 @@ int Viewer::run(){
         glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &M[0][0]);
         glUniform3f(lightPosId, lightPos.x, lightPos.y, lightPos.z);
 
-        m_maze.render(MVP, M);
+        auto mvp = MVP * m_trackball.rotation();
+        auto m = M * m_trackball.rotation();
+        m_maze.render(mvp, M);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
