@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <maze/maze.hpp>
 #include <maze/opengl.hpp>
+#include <maze/common.hpp>
 #include <maze/trackball.hpp>
 
 constexpr static const GLfloat g_vertex_buffer_data[] = {
@@ -19,7 +20,7 @@ extern GLuint G_M_ID;
 
 class Viewer {
 public:
-    Viewer() : m_trackball(glm::ivec2(1024, 768)), m_mouseDown(false) {};
+    Viewer() : m_trackball(glm::ivec2(WINDOW_X, WINDOW_Y)), m_mouseDown(false) {};
     int init();
     int run();
     void setMaze(Maze&& s) {

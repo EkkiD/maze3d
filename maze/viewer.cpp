@@ -33,6 +33,7 @@ void Viewer::onMouseButton(GLFWwindow* window, int button, int action, int mods)
 
 void Viewer::onMouseMove(GLFWwindow* window, double x, double y){
     auto viewer = static_cast<Viewer*>(glfwGetWindowUserPointer(window));
+    y = WINDOW_Y - y;
     if (viewer->m_mouseDown) {
         viewer->m_trackball.mouseMove(glm::ivec2((int)x, (int)y));
     }

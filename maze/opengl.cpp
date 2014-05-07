@@ -1,5 +1,6 @@
 #include <iostream>
-#include <test/opengl.hpp>
+#include <maze/opengl.hpp>
+#include <maze/common.hpp>
 #include <glfw3.h>
 GLuint G_CUBE_VAO = 0;
 
@@ -198,7 +199,7 @@ GLFWwindow* initGL() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(1024, 768, "Test", nullptr, nullptr); if (window == nullptr) {
+    window = glfwCreateWindow(WINDOW_X, WINDOW_Y, "Test", nullptr, nullptr); if (window == nullptr) {
         std::cerr<<"Failed to open GLFW window."<<std::endl;
         glfwTerminate();
         return nullptr;

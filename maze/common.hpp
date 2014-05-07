@@ -25,4 +25,7 @@ const unsigned char WEST = 8;
 const int NUM_ROWS = 10;
 const int NUM_COLS = 10;
 
+const int WINDOW_X = 1024;
+const int WINDOW_Y = 768;
+
 #endif
