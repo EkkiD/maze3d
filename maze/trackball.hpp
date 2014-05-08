@@ -12,6 +12,7 @@ public:
     {
         m_currentQuat = glm::quat();
         m_radius = std::min( (float)screen_size.x / 2, (float)screen_size.y / 2 );
+        m_center = glm::ivec2( screen_size.x /2, screen_size.y/2);
     }
 
     void mouseDown(const glm::ivec2 &mouse_pos) {
@@ -34,13 +35,14 @@ public:
 private:
     glm::ivec2 m_screenSize;
     glm::ivec2 m_initialMousePos;
+    glm::ivec2 m_center;
     glm::quat m_currentQuat, m_initialQuat;
     float m_radius;
 
     glm::vec3 projectPoint(const glm::ivec2 &point) {
         glm::vec3 result;
-        result.x = (point.x - 0) / (m_radius* 2);
-        result.y = (point.y - 0) / (m_radius* 2);
+        result.x = (point.x - m_center.x) / (m_radius* 2);
+        result.y = (point.y - m_center.y) / (m_radius* 2);
         result.z = 0.0f;
 
         float mag = glm::length2(result);
