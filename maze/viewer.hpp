@@ -7,6 +7,7 @@
 #include <maze/opengl.hpp>
 #include <maze/common.hpp>
 #include <maze/trackball.hpp>
+#include <maze/interaction.hpp>
 
 constexpr static const GLfloat g_vertex_buffer_data[] = {
     -1.0f, -1.0f, 0.0f,
@@ -20,7 +21,7 @@ extern GLuint G_M_ID;
 
 class Viewer {
 public:
-    Viewer() : m_trackball(glm::ivec2(WINDOW_X, WINDOW_Y)), m_mouseDown(false) {};
+    Viewer() {};
     int init();
     int run();
     void setMaze(Maze&& s) {
@@ -31,9 +32,6 @@ public:
         return &m_maze;
     }
 private:
-    static void onMouseButton(GLFWwindow* window, int button, int action, int mods);
-    static void onMouseMove(GLFWwindow* window, double x, double y);
-
     void setMVP();
     glm::mat4 MVP;
     glm::mat4 P;
@@ -44,8 +42,7 @@ private:
 
     Maze m_maze;
     GLFWwindow* window;
-    Trackball m_trackball;
-    bool m_mouseDown;
+    Interaction m_interaction;
 };
 
 #endif

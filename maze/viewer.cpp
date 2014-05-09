@@ -13,30 +13,11 @@ GLuint G_MVP_ID = 0;
 GLuint G_M_ID = 0;
 GLuint G_V_ID = 0;
 
-int Viewer::init() {
+int Viewer::init(){
     window = initGL(); 
     if (window == nullptr) { return -1; }
-    setMVP();
-    glfwSetMouseButtonCallback(window, onMouseButton);
-    glfwSetCursorPosCallback(window, onMouseMove);
-    glfwSetWindowUserPointer(window, (void*)this);
+    m_interaction.init(window);
     return 0;
-}
-
-void Viewer::onMouseButton(GLFWwindow* window, int button, int action, int mods){
-    auto viewer = static_cast<Viewer*>(glfwGetWindowUserPointer(window));
-    double x, y;
-    glfwGetCursorPos(window, &x, &y);
-    viewer->m_trackball.mouseDown(glm::ivec2((int)x, (int)y));
-    viewer->m_mouseDown = (action == GLFW_PRESS);
-}
-
-void Viewer::onMouseMove(GLFWwindow* window, double x, double y){
-    auto viewer = static_cast<Viewer*>(glfwGetWindowUserPointer(window));
-    y = WINDOW_Y - y;
-    if (viewer->m_mouseDown) {
-        viewer->m_trackball.mouseMove(glm::ivec2((int)x, (int)y));
-    }
 }
 
 int Viewer::run(){
@@ -45,7 +26,8 @@ int Viewer::run(){
     G_V_ID = glGetUniformLocation(programID, "V");
     G_M_ID = glGetUniformLocation(programID, "M");
     GLuint lightPosId = glGetUniformLocation(programID, "LightPosition_world");
-    glm::vec3 lightPos = glm::vec3(11.0f, 11.0f, 11.0f);
+    auto lightPos = m_interaction.cameraLoc();
+    setMVP();
 
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -56,9 +38,10 @@ int Viewer::run(){
         glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &M[0][0]);
         glUniform3f(lightPosId, lightPos.x, lightPos.y, lightPos.z);
 
-        auto mvp = MVP * m_trackball.rotation();
-        auto m = M * m_trackball.rotation();
-        m_maze.render(mvp, M);
+        //auto mvp = MVP * m_trackball.rotation();
+        auto mvp = P * V * M * m_interaction.rotation();
+        auto m =  M * m_interaction.rotation();
+        m_maze.render(mvp, m);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -71,7 +54,7 @@ int Viewer::run(){
 
 void Viewer::setMVP() {
     P = glm::perspective(1.04719f, 4.0f/4.0f, 0.1f, 1000.0f);
-    V = glm::lookAt(glm::vec3(11,11,11), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    V = glm::lookAt(m_interaction.cameraLoc(), glm::vec3(0,0,0), glm::vec3(0,1,0));
     M = glm::mat4(1.0f);
     MVP = P * V * M;
 }
