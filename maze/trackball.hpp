@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/norm.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 class Trackball {
 public:
@@ -25,6 +26,7 @@ public:
         glm::vec3 to = projectPoint(new_pos);
         
         glm::vec3 axis = glm::cross(from, to);
+        std::cout<<glm::to_string(axis)<<std::endl;
         m_currentQuat = m_initialQuat * glm::quat(glm::dot(from, to), axis.x, axis.y, axis.z);
         m_currentQuat = glm::normalize(m_currentQuat);
     }

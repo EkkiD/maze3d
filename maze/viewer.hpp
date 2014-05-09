@@ -36,7 +36,6 @@ private:
     glm::mat4 MVP;
     glm::mat4 P;
     glm::mat4 V;
-    glm::mat4 M;
 
     void cleanup(GLuint programID);
 
