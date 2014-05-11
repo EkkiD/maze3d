@@ -35,7 +35,7 @@ private:
     int m_col;
     Wall n_wall;
     Wall w_wall;
-    STATUS m_status;
+    STATUS m_status = UNTOUCHED;
 };
 
 class Maze {

@@ -7,19 +7,13 @@
 
 int main(){
     auto viewer = Viewer();
-    int r = viewer.init();
-    if (r < 0) { return -1; }
 
     auto maze = Maze();
 
-    maze.print_nodes();
-
     viewer.setMaze(std::move(maze));
 
-    auto generator = DFSGenerator(viewer.getRawMaze());
+    int r = viewer.init();
+    if (r < 0) { return -1; }
 
-    generator.setStartLoc(GridPoint(5, 5));
-    while (generator.step()) {
-    }
     return viewer.run();
 }

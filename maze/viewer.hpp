@@ -8,6 +8,7 @@
 #include <maze/common.hpp>
 #include <maze/trackball.hpp>
 #include <maze/interaction.hpp>
+#include <maze/generator.hpp>
 
 constexpr static const GLfloat g_vertex_buffer_data[] = {
     -1.0f, -1.0f, 0.0f,
@@ -21,7 +22,7 @@ extern GLuint G_M_ID;
 
 class Viewer {
 public:
-    Viewer() {};
+    Viewer(): m_generator(&m_maze) {};
     int init();
     int run();
     void setMaze(Maze&& s) {
@@ -42,6 +43,7 @@ private:
     Maze m_maze;
     GLFWwindow* window;
     Interaction m_interaction;
+    DFSGenerator m_generator; 
 };
 
 #endif

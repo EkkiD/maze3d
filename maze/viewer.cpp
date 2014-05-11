@@ -8,6 +8,9 @@ using namespace glm;
  
 #include <common/shader.hpp>
 
+#include <chrono>
+#include <thread>
+
 
 GLuint G_MVP_ID = 0;
 GLuint G_M_ID = 0;
@@ -17,6 +20,9 @@ int Viewer::init(){
     window = initGL(); 
     if (window == nullptr) { return -1; }
     m_interaction.init(window);
+
+    m_generator.setStartLoc(GridPoint(5, 5));
+
     return 0;
 }
 
@@ -30,6 +36,8 @@ int Viewer::run(){
     setMVP();
 
     do {
+        m_generator.step();
+        
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(programID);
 
@@ -46,6 +54,8 @@ int Viewer::run(){
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
     } while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && 
             glfwWindowShouldClose(window) == 0);
 

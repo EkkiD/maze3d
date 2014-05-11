@@ -88,6 +88,5 @@ bool DFSGenerator::step() {
     m_stack.push_back(new_loc);
     m_maze->getCell(new_loc.x, new_loc.y)->setStatus(CURRENT);
 
-
     return true;
 }
