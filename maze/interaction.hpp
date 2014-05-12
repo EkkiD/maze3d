@@ -2,6 +2,7 @@
 #define __INTERACTION_HPP__
 #include <glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
+#include <maze/trackball.hpp>
 
 class Interaction{
 public:
@@ -30,7 +31,6 @@ public:
         } else if (self->m_mouseButton == GLFW_MOUSE_BUTTON_LEFT) {
             float dx = x - self->m_mousePos.x;
             float dy = y - self->m_mousePos.y;
-            std::cout<<x<<" "<<y<<""<<dx<<" "<<dy<<std::endl;
             self->translate(dx / 60.0f, dy / 60.0f, 0.0f);
         }
         self->m_mousePos = glm::vec2(x, y);
@@ -45,7 +45,6 @@ public:
 private:
     void translate(float x, float y, float z) {
         m_translation = m_translation + glm::vec3(x, y , z);
-        std::cout<<glm::to_string(m_translation)<<std::endl;
     }
 
     Trackball m_trackball = Trackball(glm::ivec2(WINDOW_X, WINDOW_Y));

@@ -41,8 +41,8 @@ int Viewer::run(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(programID);
 
-        auto mvp = P * V * m_interaction.rotation() * m_interaction.translation();
-        auto m = m_interaction.rotation() * m_interaction.translation();
+        auto mvp = P * V * m_interaction.translation() * m_interaction.rotation();
+        auto m = m_interaction.translation() * m_interaction.rotation();
 
         glUniformMatrix4fv(G_MVP_ID, 1, GL_FALSE, &mvp[0][0]);
         glUniformMatrix4fv(G_V_ID, 1, GL_FALSE, &V[0][0]);

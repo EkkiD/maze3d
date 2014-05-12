@@ -6,7 +6,6 @@
 #include <maze/maze.hpp>
 #include <maze/opengl.hpp>
 #include <maze/common.hpp>
-#include <maze/trackball.hpp>
 #include <maze/interaction.hpp>
 #include <maze/generator.hpp>
 
