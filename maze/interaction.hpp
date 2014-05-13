@@ -20,7 +20,7 @@ public:
             if (action == GLFW_PRESS) {
                 self->m_trackball.mouseDown(glm::ivec2((int)x, (int)y));
             } else {
-                self->m_rotation = self->m_rotation * self->m_trackball.rotation();
+                self->m_rotation = self->m_trackball.rotation() *self->m_rotation;
                 self->m_trackball.reset();
             }
         }
@@ -46,7 +46,7 @@ public:
     const glm::vec3 cameraLoc() { return m_cameraLoc; }
 
     glm::mat4 rotation() { 
-        return m_rotation * m_trackball.rotation(); 
+        return  m_trackball.rotation() * m_rotation ; 
     }
     glm::mat4 translation() { return glm::translate(glm::mat4(1.0f), m_translation); }
 
