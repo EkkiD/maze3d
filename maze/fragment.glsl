@@ -6,11 +6,12 @@ in vec3 Normal_camera;
 in vec3 EyeDirection_camera;
 in vec3 LightDirection_camera;
 
-
 // Output
 out vec3 color;
 
-// 
+// From C++
+uniform sampler1D permTex;
+uniform sampler1D gradTex;
 uniform vec3 LightPosition_world;
 
 void main() {

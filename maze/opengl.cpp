@@ -185,6 +185,24 @@ void initPrimitives() {
     initCube();
 }
 
+void initTex() {
+    GLuint permTex, gradTex;
+    glGenTextures(1, &permTex);
+    glGenTextures(1, &gradTex);
+
+    unsigned char perms[256][4];
+    glBindTexture(GL_TEXTURE_1D, permTex);
+    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, perms);
+    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    glBindTexture(GL_TEXTURE_1D, gradTex);
+    unsigned char grads[16][4];
+    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, grads);
+    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+};
+
 GLFWwindow* initGL() {
     GLFWwindow* window;
     if (!glfwInit()) {
@@ -220,6 +238,7 @@ GLFWwindow* initGL() {
     glCullFace(GL_BACK);
 
     initPrimitives();
+    initTex();
     return window;
 }
 
