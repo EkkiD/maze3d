@@ -24,6 +24,7 @@ void main() {
     position_worldspace = (M * vec4(vertexPosition_modelspace, 1)).xyz;
 
     vec3 vertexPosition_camera = (V * M * vec4(vertexPosition_modelspace, 1)).xyz;
+
     // In camera space, camera is at origin.
     EyeDirection_camera = vec3(0, 0, 0) - vertexPosition_camera;
 
