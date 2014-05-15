@@ -2,6 +2,7 @@
 #include <maze/opengl.hpp>
 #include <maze/common.hpp>
 #include <glfw3.h>
+#include <maze/perlin.hpp>
 GLuint G_CUBE_VAO = 0;
 
 void initCube() {
@@ -190,15 +191,13 @@ void initTex() {
     glGenTextures(1, &permTex);
     glGenTextures(1, &gradTex);
 
-    unsigned char perms[256][4];
     glBindTexture(GL_TEXTURE_1D, permTex);
-    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, perms);
+    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, PERLIN_PERM);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     glBindTexture(GL_TEXTURE_1D, gradTex);
-    unsigned char grads[16][4];
-    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, grads);
+    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, PERLIN_GRAD3);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 };
