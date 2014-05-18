@@ -2,6 +2,7 @@
 
 in vec3 fragmentColor;
 in vec3 position_worldspace;
+in vec3 position_base;
 in vec3 Normal_camera;
 in vec3 EyeDirection_camera;
 in vec3 LightDirection_camera;
@@ -106,11 +107,11 @@ void main() {
 //    color = 0.2 * position_worldspace;
 //    color.g = 0.6 * position_worldspace.y;
 
-    float noise_val = sin( position_worldspace.x + 4*mod(position_worldspace.x, 4)+ 
-            1.5*( 2*abs(noise(position_worldspace)) + 
-                0.5* abs(noise(2*position_worldspace)) + 
-                0.25 * abs(noise(4*position_worldspace)) +
-                0.125 * abs(noise(8*position_worldspace))));
+    float noise_val = sin( position_base.x + 4*mod(position_base.x, 4)+ 
+            1.5*( 2*abs(noise(position_base)) + 
+                0.5* abs(noise(2*position_base)) + 
+                0.25 * abs(noise(4*position_base)) +
+                0.125 * abs(noise(8*position_base))));
     noise_val = noise_val * noise_val * noise_val;
 
     color = noise_val * MaterialDiffuseColor;

@@ -14,12 +14,14 @@ uniform vec3 LightPosition_world; // position of light in worldspace!!!
 // to be interpolated per fragment
 out vec3 fragmentColor;
 out vec3 position_worldspace;
+out vec3 position_base;
 out vec3 Normal_camera;
 out vec3 EyeDirection_camera;
 out vec3 LightDirection_camera;
 
 void main() {
     gl_Position = MVP * vec4(vertexPosition_modelspace, 1);
+    position_base = (vec4(vertexPosition_modelspace, 1)).xyz;
 
     position_worldspace = (M * vec4(vertexPosition_modelspace, 1)).xyz;
 
