@@ -42,7 +42,7 @@ int Viewer::run(){
         glUseProgram(programID);
 
         auto mvp = P * V * m_interaction.translation() * m_interaction.rotation();
-        auto m = m_interaction.translation() * m_interaction.rotation();
+        auto m = glm::mat4(1.0f);
 
         glUniformMatrix4fv(G_MVP_ID, 1, GL_FALSE, &mvp[0][0]);
         glUniformMatrix4fv(G_V_ID, 1, GL_FALSE, &V[0][0]);
