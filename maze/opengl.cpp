@@ -164,13 +164,13 @@ void initCube() {
     
     glBindBuffer(GL_ARRAY_BUFFER, vbo_colors);
     glBufferData(GL_ARRAY_BUFFER, sizeof(cube_colors), cube_colors, GL_STATIC_DRAW);
-    // TODO: un-hardcode the 0 here
+    // TODO: un-hardcode the 1 here
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1 , 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_normals);
     glBufferData(GL_ARRAY_BUFFER, sizeof(cube_normals), cube_normals, GL_STATIC_DRAW);
-    // TODO: un-hardcode the 0 here
+    // TODO: un-hardcode the 2 here
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2 , 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
@@ -191,16 +191,19 @@ void initTex() {
     glGenTextures(1, &permTex);
     glGenTextures(1, &gradTex);
 
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_1D, permTex);
-    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, PERLIN_PERM);
+    glTexImage1D(GL_TEXTURE_1D, 0, GL_R8, 256, 0, GL_RED, GL_UNSIGNED_BYTE, PERLIN_PERM);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+    glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_1D, gradTex);
-    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, PERLIN_GRAD3);
+    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, 16, 0, GL_RGB, GL_UNSIGNED_BYTE, PERLIN_GRAD3);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-};
+    glActiveTexture(GL_TEXTURE0);
+}
 
 GLFWwindow* initGL() {
     GLFWwindow* window;
@@ -240,4 +243,3 @@ GLFWwindow* initGL() {
     initTex();
     return window;
 }
-

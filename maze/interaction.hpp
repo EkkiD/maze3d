@@ -9,6 +9,7 @@ public:
     void init(GLFWwindow* window) {
         glfwSetMouseButtonCallback(window, onMouseButton);
         glfwSetCursorPosCallback(window, onMouseMove);
+        glfwSetScrollCallback(window, onMouseScroll);
         glfwSetWindowUserPointer(window, (void*)this);
     }
 
@@ -41,6 +42,13 @@ public:
             self->translate(dx / 60.0f, dy / 60.0f, 0.0f);
         }
         self->m_mousePos = glm::vec2(x, y);
+    }
+
+    static void onMouseScroll(GLFWwindow* window, double x, double y){
+        auto self = static_cast<Interaction*>(glfwGetWindowUserPointer(window));
+        self->translate(0, 0, y);
+
+        std::cout<<x<<" "<<y<<std::endl;
     }
 
     const glm::vec3 cameraLoc() { return m_cameraLoc; }
