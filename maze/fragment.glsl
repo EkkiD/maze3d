@@ -11,8 +11,6 @@ in vec3 LightDirection_camera;
 out vec3 color;
 
 // From C++
-uniform sampler1D permTex;
-uniform sampler1D gradTex;
 uniform vec3 LightPosition_world;
 
 
@@ -124,7 +122,7 @@ void main() {
     float LightPower = 400.0f;
 
     // Material properties
-    vec3 MaterialDiffuseColor = fragmentColor;
+    vec3 MaterialDiffuseColor = vec3(0.6, 0.6, 0.66); //fragmentColor;
     vec3 MaterialAmbientColor = vec3(0.2, 0.2, 0.2) * MaterialDiffuseColor;
     vec3 MaterialSpecularColor = vec3(0.3, 0.3, 0.3);
 
@@ -152,9 +150,9 @@ void main() {
 
     vec3 pose = vec3(0.1 * (position_worldspace.x + 5), position_worldspace.y, 0.1 * (position_worldspace.z + 5));
     vec3 noise_pos = 15 * pose;
-    float noise_base =  15 * position_worldspace.x;
-    float noise_val = sin(noise_base + 5 * (turbulence(position_worldspace)));
-    noise_val = 1 - (noise_val );
+    float noise_base =  7 * (position_worldspace.x + position_worldspace.z +  0.2 * position_worldspace.y);
+    float noise_val = sin(noise_base + 2.5 * (turbulence(position_worldspace)));
+    noise_val = 1 - noise_val;
 
     color = noise_val * color;
 }
