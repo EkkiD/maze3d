@@ -108,6 +108,16 @@ float snoise(vec3 v)
                                 dot(p2,x2), dot(p3,x3) ) );
   }
 
+float turbulence(vec3 point) {
+    float sum = 0;
+    sum += snoise(point) +
+           0.5 * snoise(2 * point) +
+           0.25 * snoise(4 * point) +
+           0.125 * snoise(8 * point) + 
+           0.0625 * snoise(16 * point);
+    return abs(sum);
+}
+
 void main() {
     // TODO: move to C++ 
     vec3 LightColor = vec3(1, 1, 1);
@@ -136,21 +146,15 @@ void main() {
     // cosine angle between eye vector and reflection vector
     float cosAlpha = clamp( dot(E, R), 0, 1);
 
-//    color = MaterialAmbientColor + 
-//            MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance2) +
-//            MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha, 5) / (distance2);
-//    color = 0.2 * position_worldspace;
-//    color.g = 0.6 * position_worldspace.y;
+    color = MaterialAmbientColor + 
+            MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance2) +
+            MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha, 5) / (distance2);
 
     vec3 pose = vec3(0.1 * (position_worldspace.x + 5), position_worldspace.y, 0.1 * (position_worldspace.z + 5));
     vec3 noise_pos = 15 * pose;
     float noise_base =  15 * position_worldspace.x;
-    float noise_val = sin(noise_base + (
-                1.0*( abs(snoise(noise_pos)) + 
-                0.5* abs(snoise(2*noise_pos)) + 
-                0.25 * abs(snoise(4*noise_pos)) +
-                0.125 * abs(snoise(8*noise_pos)))));
+    float noise_val = sin(noise_base + 5 * (turbulence(position_worldspace)));
+    noise_val = 1 - (noise_val );
 
-    color =  MaterialDiffuseColor;
-    color =  vec3(noise_val, noise_val, noise_val);
+    color = noise_val * color;
 }
