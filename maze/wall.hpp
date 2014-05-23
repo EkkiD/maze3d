@@ -12,6 +12,9 @@ public:
     void translate(float x, float y, float z);
     void scale(float x, float y, float z);
 
+    void knockDown();
+
+    bool m_visible = true;
 private:
     glm::mat4 m_translation;
     glm::mat4 m_rotation;

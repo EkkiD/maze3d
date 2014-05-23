@@ -28,3 +28,7 @@ void Wall::render(glm::mat4 MVP, glm::mat4 M) const {
     glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &M[0][0]);
     glBindVertexArray(0);
 }
+
+void Wall::knockDown() {
+    m_visible = false;
+}

@@ -16,16 +16,22 @@ Cell::Cell(int row, int col):
 }
 
 void Cell::render(glm::mat4 MVP, glm::mat4 M) const {
-    if (m_wall_bitmask & WEST) {
+    if (w_wall.m_visible) {
         w_wall.render(MVP, M);
     }
-    if (m_wall_bitmask & NORTH) {
+    if (n_wall.m_visible) {
         n_wall.render(MVP, M);
     }
 }
 
 void Cell::tearDown(int direction) {
     m_wall_bitmask ^= direction;
+    
+    if (direction & NORTH) {
+        n_wall.knockDown();
+    } else if (direction & WEST) {
+        w_wall.knockDown();
+    }
 }
 
 
