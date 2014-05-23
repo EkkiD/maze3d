@@ -35,7 +35,10 @@ int Viewer::run(){
     auto lightPos = m_interaction.cameraLoc();
     setMVP();
 
+    int sleep_time = 0;
     do {
+        auto frame_start = std::chrono::system_clock::now();
+
         m_generator.step();
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -55,7 +58,8 @@ int Viewer::run(){
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        auto sleep_time = (frame_start + std::chrono::milliseconds(15)) - std::chrono::system_clock::now();
+        std::this_thread::sleep_for(sleep_time);
     } while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && 
             glfwWindowShouldClose(window) == 0);
 
