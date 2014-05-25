@@ -31,4 +31,5 @@ void Wall::render(glm::mat4 MVP, glm::mat4 M) const {
 
 void Wall::knockDown() {
     m_visible = false;
+    m_state = removed;
 }

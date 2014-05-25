@@ -35,7 +35,6 @@ int Viewer::run(){
     auto lightPos = m_interaction.cameraLoc();
     setMVP();
 
-    int sleep_time = 0;
     do {
         auto frame_start = std::chrono::system_clock::now();
 

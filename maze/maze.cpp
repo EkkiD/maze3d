@@ -16,10 +16,10 @@ Cell::Cell(int row, int col):
 }
 
 void Cell::render(glm::mat4 MVP, glm::mat4 M) const {
-    if (w_wall.m_visible) {
+    if (w_wall.isVisible()) {
         w_wall.render(MVP, M);
     }
-    if (n_wall.m_visible) {
+    if (n_wall.isVisible()) {
         n_wall.render(MVP, M);
     }
 }

@@ -4,6 +4,12 @@
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 
+enum wall_state {
+    initial,
+    falling,
+    fading,
+    removed
+};
 
 class Wall {
 public:
@@ -14,8 +20,11 @@ public:
 
     void knockDown();
 
-    bool m_visible = true;
+    bool isVisible() const { return m_visible; } 
 private:
+    bool m_visible = true;
+    wall_state m_state = initial;
+
     glm::mat4 m_translation;
     glm::mat4 m_rotation;
     glm::mat4 m_scaling;
