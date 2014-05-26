@@ -15,6 +15,7 @@ using namespace glm;
 GLuint G_MVP_ID = 0;
 GLuint G_M_ID = 0;
 GLuint G_V_ID = 0;
+GLuint G_ALPHA_ID = 0;
 
 int Viewer::init(){
     window = initGL(); 
@@ -31,6 +32,7 @@ int Viewer::run(){
     G_MVP_ID = glGetUniformLocation(programID, "MVP");
     G_V_ID = glGetUniformLocation(programID, "V");
     G_M_ID = glGetUniformLocation(programID, "M");
+    G_ALPHA_ID = glGetUniformLocation(programID, "ALPHA");
     GLuint lightPosId = glGetUniformLocation(programID, "LightPosition_world");
     auto lightPos = m_interaction.cameraLoc();
     setMVP();
@@ -38,8 +40,11 @@ int Viewer::run(){
     do {
         auto frame_start = std::chrono::system_clock::now();
 
+        // Update the engine state
         m_generator.step();
+        m_maze.step();
         
+        // Render the scene
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(programID);
 
@@ -57,7 +62,7 @@ int Viewer::run(){
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        auto sleep_time = (frame_start + std::chrono::milliseconds(15)) - std::chrono::system_clock::now();
+        auto sleep_time = (frame_start + std::chrono::milliseconds(100)) - std::chrono::system_clock::now();
         std::this_thread::sleep_for(sleep_time);
     } while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && 
             glfwWindowShouldClose(window) == 0);

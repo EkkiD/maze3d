@@ -10,3 +10,4 @@ void initCube();
 extern GLuint G_CUBE_VAO;
 
 #endif
+

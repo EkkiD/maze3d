@@ -20,16 +20,27 @@ void Wall::render(glm::mat4 MVP, glm::mat4 M) const {
     auto new_m = M * m_translation * m_scaling;
     glUniformMatrix4fv(G_MVP_ID, 1, GL_FALSE, &new_mvp[0][0]);
     glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &new_m[0][0]);
+    glUniform1f(G_ALPHA_ID, m_alpha);
 
     // TODO: unhardcode 30
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0);
 
     glUniformMatrix4fv(G_MVP_ID, 1, GL_FALSE, &MVP[0][0]);
     glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &M[0][0]);
+    glUniform1f(G_ALPHA_ID, 1.0);
+
     glBindVertexArray(0);
 }
 
+void Wall::step() {
+    if (m_state == fading) {
+        m_alpha -= fade_step; 
+        if (m_alpha < 0) {
+            m_state = removed;
+        }
+    }
+}
+
 void Wall::knockDown() {
-    m_visible = false;
-    m_state = removed;
+    m_state = fading;
 }

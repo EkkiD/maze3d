@@ -8,10 +8,11 @@ in vec3 EyeDirection_camera;
 in vec3 LightDirection_camera;
 
 // Output
-out vec3 color;
+out vec4 color;
 
 // From C++
 uniform vec3 LightPosition_world;
+uniform float ALPHA; // The alpha value to use
 
 
 vec3 mod289(vec3 x) {
@@ -144,9 +145,10 @@ void main() {
     // cosine angle between eye vector and reflection vector
     float cosAlpha = clamp( dot(E, R), 0, 1);
 
-    color = MaterialAmbientColor + 
+    color = vec4(MaterialAmbientColor + 
             MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance2) +
-            MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha, 5) / (distance2);
+            MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha, 5) / (distance2),
+            ALPHA);
 
     vec3 pose = vec3(0.1 * (position_worldspace.x + 5), position_worldspace.y, 0.1 * (position_worldspace.z + 5));
     vec3 noise_pos = 15 * pose;
@@ -155,4 +157,5 @@ void main() {
     noise_val = 1 - noise_val;
 
     color = noise_val * color;
+    color.a = ALPHA;
 }

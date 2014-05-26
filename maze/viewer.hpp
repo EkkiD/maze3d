@@ -18,6 +18,7 @@ constexpr static const GLfloat g_vertex_buffer_data[] = {
 extern GLuint G_MVP_ID;
 extern GLuint G_V_ID;
 extern GLuint G_M_ID;
+extern GLuint G_ALPHA_ID;
 
 class Viewer {
 public:

@@ -29,6 +29,11 @@ public:
         return (m_wall_bitmask & direction) != 0 ;
     }
 
+    void step() {
+        n_wall.step();
+        w_wall.step();
+    }
+
 private:
     unsigned char m_wall_bitmask;
     int m_row;
@@ -50,6 +55,12 @@ public:
     void print_nodes() const {
         for (const auto& n: nodes) {
             n->print();
+        }
+    }
+
+    void step() {
+        for (auto& c: m_cells) {
+            c.step();
         }
     }
 
