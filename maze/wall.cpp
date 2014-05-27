@@ -5,6 +5,7 @@
 #include <maze/opengl.hpp>
 #include <maze/viewer.hpp>
 
+
 void Wall::translate(float x, float y, float z) {
     m_translation = m_translation * glm::translate(m_translation, glm::vec3(x, y, z));
 }
@@ -16,8 +17,8 @@ void Wall::scale(float x, float y, float z) {
 void Wall::render(glm::mat4 MVP, glm::mat4 M) const {
     glBindVertexArray(G_CUBE_VAO);
 
-    auto new_mvp = MVP * m_translation * m_scaling;
-    auto new_m = M * m_translation * m_scaling;
+    auto new_mvp = MVP * m_translation * m_scaling * m_rotation;
+    auto new_m = M * m_translation * m_scaling * m_rotation;
     glUniformMatrix4fv(G_MVP_ID, 1, GL_FALSE, &new_mvp[0][0]);
     glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &new_m[0][0]);
     glUniform1f(G_ALPHA_ID, m_alpha);
@@ -33,7 +34,23 @@ void Wall::render(glm::mat4 MVP, glm::mat4 M) const {
 }
 
 void Wall::step() {
-    if (m_state == fading) {
+    if (m_state == falling) {
+        std::cout<<"falling"<<std::endl;
+        float prev_angle = m_angle;
+        m_angle = m_angle - m_rotation_velocity;
+        m_angle = m_angle < 0.0 ? 0.0 : m_angle;
+        std::cout<<m_angle<<std::endl;
+
+        m_rotation_velocity = sqrt(3*9.81*(1-std::sin(m_angle)));
+
+        // Depending on the direction of the wall, we want to fall in a different direction;
+        m_rotation = m_rotation * glm::rotate(m_rotation, -(m_angle - prev_angle), glm::vec3(0.0f, 0.0f, 1.0f));
+        
+        if (m_angle < 0.0f) {
+            m_angle = 0.0f;
+            m_state = fading;
+        }
+    } else if (m_state == fading) {
         m_alpha -= fade_step; 
         if (m_alpha < 0) {
             m_state = removed;
@@ -42,5 +59,6 @@ void Wall::step() {
 }
 
 void Wall::knockDown() {
-    m_state = fading;
+    m_state = falling;
+    m_rotation_velocity = 0.1f;
 }

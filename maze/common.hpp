@@ -1,6 +1,7 @@
 #ifndef __COMMON_HPP__
 #define __COMMON_HPP__
 #include <iostream>
+#include <cmath>
 
 enum STATUS { 
     UNTOUCHED,
@@ -27,5 +28,7 @@ const int NUM_COLS = 10;
 
 const int WINDOW_X = 1024;
 const int WINDOW_Y = 768;
+
+constexpr const double PI = M_PI; //std::atan(1.0f) * 4.0f;
 
 #endif

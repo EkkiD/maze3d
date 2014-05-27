@@ -4,6 +4,7 @@
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 
+#include <maze/common.hpp>
 
 
 enum wall_state {
@@ -27,6 +28,8 @@ public:
 
 private:
     wall_state m_state = initial;
+    float m_angle = 0.5f * PI;
+    float m_rotation_velocity = 0.0f;
 
     glm::mat4 m_translation;
     glm::mat4 m_rotation;
