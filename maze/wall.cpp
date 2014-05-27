@@ -46,7 +46,7 @@ void Wall::step() {
         // Depending on the direction of the wall, we want to fall in a different direction;
         m_rotation = m_rotation * glm::rotate(m_rotation, -(m_angle - prev_angle), glm::vec3(0.0f, 0.0f, 1.0f));
         
-        if (m_angle < 0.0f) {
+        if (m_angle <= 0.0f) {
             m_angle = 0.0f;
             m_state = fading;
         }
