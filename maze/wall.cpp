@@ -35,16 +35,15 @@ void Wall::render(glm::mat4 MVP, glm::mat4 M) const {
 
 void Wall::step() {
     if (m_state == falling) {
-        std::cout<<"falling"<<std::endl;
         float prev_angle = m_angle;
         m_angle = m_angle - m_rotation_velocity;
         m_angle = m_angle < 0.0 ? 0.0 : m_angle;
-        std::cout<<m_angle<<std::endl;
 
         m_rotation_velocity = sqrt(3*9.81*(1-std::sin(m_angle)));
 
         // Depending on the direction of the wall, we want to fall in a different direction;
-        m_rotation = m_rotation * glm::rotate(m_rotation, -(m_angle - prev_angle), glm::vec3(0.0f, 0.0f, 1.0f));
+        auto rotation_axis =  glm::vec3(0.0f, 0.0f, 1.0f);
+        m_rotation = m_rotation * glm::rotate(m_rotation, -(m_angle - prev_angle), rotation_axis);
         
         if (m_angle <= 0.0f) {
             m_angle = 0.0f;
