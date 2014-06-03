@@ -24,13 +24,13 @@ void Cell::render(glm::mat4 MVP, glm::mat4 M) const {
     }
 }
 
-void Cell::tearDown(int direction) {
+void Cell::tearDown(int direction, int fall_direction) {
     m_wall_bitmask ^= direction;
     
     if (direction & NORTH) {
-        n_wall.knockDown();
+        n_wall.knockDown(fall_direction);
     } else if (direction & WEST) {
-        w_wall.knockDown();
+        w_wall.knockDown(fall_direction);
     }
 }
 
@@ -54,9 +54,4 @@ Maze::Maze() {
         m_side_walls.back().translate(col - 5 - 0.05, 0, NUM_ROWS - 5 + 0.1);
         m_side_walls.back().scale(0.8, 1.0, 0.1);
     }
-}
-
-void Maze::tearDown(int row, int col, bool north) {
-    int index = (row * NUM_COLS) + col;
-    m_cells[index].tearDown(north ? NORTH : WEST);
 }

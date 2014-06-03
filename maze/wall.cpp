@@ -38,12 +38,12 @@ void Wall::step() {
         float prev_angle = m_angle;
         m_angle = m_angle - m_rotation_velocity;
         m_angle = m_angle < 0.0 ? 0.0 : m_angle;
+        m_angle = 0.0f;
 
         m_rotation_velocity = sqrt(3*9.81*(1-std::sin(m_angle)));
 
         // Depending on the direction of the wall, we want to fall in a different direction;
-        auto rotation_axis =  glm::vec3(0.0f, 0.0f, 1.0f);
-        m_rotation = m_rotation * glm::rotate(m_rotation, -(m_angle - prev_angle), rotation_axis);
+        m_rotation = glm::rotate(m_rotation, m_angle * float(0.2 * PI), m_rotation_axis);
         
         if (m_angle <= 0.0f) {
             m_angle = 0.0f;
@@ -57,7 +57,23 @@ void Wall::step() {
     }
 }
 
-void Wall::knockDown() {
+void Wall::knockDown(int direction) {
     m_state = falling;
-    m_rotation_velocity = 0.1f;
+    m_rotation_velocity = 0.001f;
+
+    switch (direction) {
+        case NORTH:
+            m_rotation_axis = glm::vec3(1.0f, 0.0f, 0.0f);
+            break;
+        case SOUTH:
+            m_rotation_axis = glm::vec3(-1.0f, 0.0f, 0.0f);
+            break;
+        case EAST:
+            m_rotation_axis = glm::vec3(0.0f, 0.0f, 1.0f);
+            break;
+        case WEST:
+            m_rotation_axis = glm::vec3(0.0f, 0.0f, -1.0f);
+            break;
+    }
+
 }

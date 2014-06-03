@@ -22,7 +22,7 @@ public:
     void translate(float x, float y, float z);
     void scale(float x, float y, float z);
 
-    void knockDown();
+    void knockDown(int direction);
 
     bool isVisible() const { return m_state != removed; } 
 
@@ -30,6 +30,7 @@ private:
     wall_state m_state = initial;
     float m_angle = 0.5f * PI;
     float m_rotation_velocity = 0.0f;
+    glm::vec3 m_rotation_axis;
 
     glm::mat4 m_translation;
     glm::mat4 m_rotation;

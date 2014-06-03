@@ -62,23 +62,23 @@ bool DFSGenerator::step() {
     auto new_loc = GridPoint(0, 0);
     
     if (direction & NORTH) {
-        m_maze->getCell(row -1, col)->tearDown(SOUTH);
-        cell->tearDown(NORTH);
+        m_maze->getCell(row -1, col)->tearDown(SOUTH, direction);
+        cell->tearDown(NORTH, direction);
         new_loc = GridPoint(row-1, col);
     } 
     if (direction & SOUTH) {
-        m_maze->getCell(row +1, col)->tearDown(NORTH);
-        cell->tearDown(SOUTH);
+        m_maze->getCell(row +1, col)->tearDown(NORTH, direction);
+        cell->tearDown(SOUTH, direction);
         new_loc = GridPoint(row+1, col);
     } 
     if (direction & EAST) {
-        m_maze->getCell(row, col+1)->tearDown(WEST);
-        cell->tearDown(EAST);
+        m_maze->getCell(row, col+1)->tearDown(WEST, direction);
+        cell->tearDown(EAST, direction);
         new_loc = GridPoint(row, col+1);
     } 
     if (direction & WEST) {
-        m_maze->getCell(row, col-1)->tearDown(EAST);
-        cell->tearDown(WEST);
+        m_maze->getCell(row, col-1)->tearDown(EAST, direction);
+        cell->tearDown(WEST, direction);
         new_loc = GridPoint(row, col-1);
     } 
 

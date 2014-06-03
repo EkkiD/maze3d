@@ -17,7 +17,7 @@ public:
 
     void render(glm::mat4 MVP, glm::mat4 M) const;
 
-    void tearDown(int direction);
+    void tearDown(int direction, int fall_direction);
 
     void setStatus(STATUS stat) { m_status = stat; }
 
@@ -77,8 +77,6 @@ public:
             side_wall.render(MVP, M);
         }
     }
-
-    void tearDown(int row, int col, bool north);
 
     Cell* getCell(int row, int col) {
         int index = row * NUM_COLS + col; 
