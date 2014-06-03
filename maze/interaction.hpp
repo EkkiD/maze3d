@@ -47,8 +47,6 @@ public:
     static void onMouseScroll(GLFWwindow* window, double x, double y){
         auto self = static_cast<Interaction*>(glfwGetWindowUserPointer(window));
         self->translate(0, 0, y);
-
-        std::cout<<x<<" "<<y<<std::endl;
     }
 
     const glm::vec3 cameraLoc() { return m_cameraLoc; }
