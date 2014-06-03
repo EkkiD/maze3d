@@ -48,16 +48,6 @@ public:
 
     Maze(); 
 
-    void add_node(std::unique_ptr<Node> n) {
-        nodes.push_back(std::move(n));
-    }
-
-    void print_nodes() const {
-        for (const auto& n: nodes) {
-            n->print();
-        }
-    }
-
     void step() {
         for (auto& c: m_cells) {
             c.step();
@@ -65,10 +55,6 @@ public:
     }
 
     void render(glm::mat4 MVP, glm::mat4 M) const {
-        for (const auto& n: nodes) {
-            n->render(MVP);
-        }
-
         for (const auto& c: m_cells) {
             c.render(MVP, M);
         }
@@ -84,7 +70,6 @@ public:
     }
 
 private:
-    std::vector<std::unique_ptr<Node>> nodes;
     std::vector<Cell> m_cells;
     std::vector<Wall> m_side_walls;
 };
