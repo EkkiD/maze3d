@@ -39,7 +39,6 @@ void Wall::render(glm::mat4 MVP, glm::mat4 M) const {
 
 void Wall::step() {
     if (m_state == falling) {
-        float prev_angle = m_angle;
         m_angle = m_angle - m_rotation_velocity;
         m_angle = m_angle < 0.0f ? 0.0f : m_angle;
 

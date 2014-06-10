@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 
 #include <maze/common.hpp>
+#include <maze/particle.hpp>
 
 
 enum wall_state {
