@@ -57,6 +57,8 @@ void Wall::step() {
             m_state = removed;
         }
     }
+
+    m_particle.step();
 }
 
 void Wall::knockDown(int direction) {
@@ -78,4 +80,5 @@ void Wall::knockDown(int direction) {
             break;
     }
 
+    m_particle.start();
 }

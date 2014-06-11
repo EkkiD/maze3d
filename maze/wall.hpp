@@ -39,6 +39,8 @@ private:
     glm::mat4 m_scaling;
     float m_alpha = 1.0;
 
+    ParticleGenerator m_particle;
+
     constexpr static const float fade_step = 1.0f / 60; 
 };
 
