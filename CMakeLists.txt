@@ -36,6 +36,7 @@ add_executable(maze
     maze/viewer.cpp
     maze/cube.cpp
     maze/generator.cpp
+    maze/particle.cpp
     maze/node.cpp
     maze/maze.cpp
     maze/wall.cpp
