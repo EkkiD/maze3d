@@ -7,6 +7,7 @@
 class Particle {
 public:
     void render(glm::mat4 MVP, glm::mat4 M) const;
+    void step() {};
 
 private:
     glm::vec3 m_position;
@@ -19,13 +20,13 @@ public:
 
     void translate(float x, float y, float z);
 
-    void start() { m_running = true; }
+    void start();
 
-    void step() {};
+    void step();
     void render(glm::mat4 MVP, glm::mat4 M) const;
     
 private:
-    std::vector<Particle> m_particles;
+    std::vector<Particle> m_particles = std::vector<Particle>(100);
     glm::mat4 m_translation;
     bool m_running;
 };
