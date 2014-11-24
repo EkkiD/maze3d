@@ -25,6 +25,7 @@ public:
     Viewer(): m_generator(&m_maze) {};
     int init();
     int run();
+    void loopBody();
     void setMaze(Maze&& s) {
         m_maze = std::move(s);
     }
@@ -44,6 +45,9 @@ private:
     GLFWwindow* window;
     Interaction m_interaction;
     DFSGenerator m_generator; 
+    GLuint m_programID;
+    GLuint m_lightPosID;
+    std::chrono::time_point<std::chrono::system_clock> m_last_frame_time;
 };
 
 #endif

@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 2.8)
+project(MAZE)
+
+include_directories(
+	extern/glm/
+	.
+)
+
+set (CMAKE_CXX_FLAGS "-g -Wall -std=c++11 -s USE_GLFW=3")
+add_definitions(-DEMSCRIPTEN)
+
+
+add_executable(maze 
+	maze/common.cpp
+	maze/main.cpp
+    maze/opengl.cpp
+    maze/viewer.cpp
+    maze/cube.cpp
+    maze/generator.cpp
+    maze/particle.cpp
+    maze/node.cpp
+    maze/maze.cpp
+    maze/wall.cpp
+	common/shader.cpp
+	
+	maze/fragment.glsl
+	maze/vertex.glsl
+)

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <maze/opengl.hpp>
 #include <maze/common.hpp>
-#include <glfw3.h> 
+#include <GLFW/glfw3.h> 
 GLuint G_CUBE_VAO = 0; 
 void initCube() {
     GLuint vao;

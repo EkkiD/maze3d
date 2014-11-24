@@ -1,6 +1,6 @@
 #ifndef __INTERACTION_HPP__
 #define __INTERACTION_HPP__
-#include <glfw3.h>
+#include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <maze/trackball.hpp>
 
@@ -17,7 +17,7 @@ public:
         auto self = static_cast<Interaction*>(glfwGetWindowUserPointer(window));
         double x, y;
         glfwGetCursorPos(window, &x, &y);
-        if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
+        if (button == GLFW_MOUSE_BUTTON_RIGHT) {
             if (action == GLFW_PRESS) {
                 self->m_trackball.mouseDown(glm::ivec2((int)x, (int)y));
             } else {
@@ -34,7 +34,7 @@ public:
         auto self = static_cast<Interaction*>(glfwGetWindowUserPointer(window));
         y = WINDOW_Y - y;
         if (!self->m_mouseDown) { return; }
-        if (self->m_mouseButton == GLFW_MOUSE_BUTTON_MIDDLE) {
+        if (self->m_mouseButton == GLFW_MOUSE_BUTTON_RIGHT) {
             self->m_trackball.mouseMove(glm::ivec2((int)x, (int)y));
         } else if (self->m_mouseButton == GLFW_MOUSE_BUTTON_LEFT) {
             float dx = x - self->m_mousePos.x;
