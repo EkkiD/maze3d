@@ -1,5 +1,7 @@
 #include <iostream>
+#ifdef EMSCRIPTEN
 #include <emscripten/emscripten.h>
+#endif
 #include <maze/viewer.hpp>
 #include <maze/maze.hpp>
 #include <maze/node.hpp>
