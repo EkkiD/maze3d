@@ -6,7 +6,7 @@ A 2.5D maze generator / animation written in C++11.
 Compiles (mostly) cleanly into x86 linux and asm.js through emscripten.
 
 # Setup for Emscripten
-1. Intall (emscripten)[http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html#installation-instructions]
+1. Intall [emscripten](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html#installation-instructions)
    Don't forget to `source ./emsdk_env.sh` from your emscripten install dir to ensure our PATH contains the necessary directories.
 2. In the root directory of the clone, run `./setup_emscripten.sh` to setup the build directory for emscripten (embuild).
 3. In the embuild directory, run make
