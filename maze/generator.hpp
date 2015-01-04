@@ -4,6 +4,8 @@
 #include <vector>
 #include <maze/common.hpp>
 
+#include <random>
+
 class Maze;
 
 class Generator {
@@ -15,7 +17,9 @@ public:
 class DFSGenerator: public Generator {
 
 public:
-    DFSGenerator(Maze* maze): m_maze(maze) {}
+    DFSGenerator(Maze* maze): m_maze(maze) {
+        m_rand.seed(std::random_device()());
+    }
     virtual void setStartLoc(GridPoint point);
     virtual bool step();
 
@@ -24,5 +28,7 @@ private:
 
     Maze* m_maze; // non-owning pointer
     std::vector<GridPoint> m_stack;
+    // Create a random generator
+    std::default_random_engine m_rand;
 };
 #endif

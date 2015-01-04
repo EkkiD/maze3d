@@ -2,8 +2,6 @@
 #include <maze/maze.hpp>
 #include <maze/common.hpp>
 
-#include <stdlib.h>  //rand()
-
 
 void DFSGenerator::setStartLoc(GridPoint point) {
     m_stack.push_back(point);
@@ -57,7 +55,10 @@ bool DFSGenerator::step() {
         return true;
     }
 
-    int index = rand() % neighbours.size();
+    // Create a distribution
+    std::uniform_int_distribution<int> dist(0, neighbours.size() - 1);
+    int index = dist(m_rand);
+
     int direction = neighbours[index];
     auto new_loc = GridPoint(0, 0);
     
