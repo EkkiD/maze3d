@@ -70,7 +70,7 @@ void Viewer::loopBody() {
     glUniform3f(m_lightPosID, lightPos.x, lightPos.y, lightPos.z);
 
     //auto mvp = MVP * m_trackball.rotation();
-    m_maze.render(mvp, m);
+    m_maze.render(mvp, m, V, invtransvm);
 
     glfwSwapBuffers(window);
     glfwPollEvents();

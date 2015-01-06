@@ -20,6 +20,7 @@ extern GLuint G_MVP_ID;
 extern GLuint G_V_ID;
 extern GLuint G_M_ID;
 extern GLuint G_ALPHA_ID;
+extern GLuint G_INVTRANSVM_ID;
 
 class Viewer {
 public:

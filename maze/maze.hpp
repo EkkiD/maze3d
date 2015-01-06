@@ -15,7 +15,7 @@ class Cell {
 public:
     Cell(int row, int col);
 
-    void render(glm::mat4 MVP, glm::mat4 M) const;
+    void render(glm::mat4 MVP, glm::mat4 M, glm::mat4 V, glm::mat4 invtransvm) const;
 
     void tearDown(int direction, int fall_direction);
 
@@ -54,13 +54,13 @@ public:
         }
     }
 
-    void render(glm::mat4 MVP, glm::mat4 M) const {
+    void render(glm::mat4 MVP, glm::mat4 M, glm::mat4 V, glm::mat4 invtransvm) const {
         for (const auto& c: m_cells) {
-            c.render(MVP, M);
+            c.render(MVP, M, V, invtransvm);
         }
 
         for (const auto& side_wall: m_side_walls) {
-            side_wall.render(MVP, M);
+            side_wall.render(MVP, M, V, invtransvm);
         }
     }
 

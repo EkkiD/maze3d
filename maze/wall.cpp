@@ -18,13 +18,16 @@ void Wall::rotate(float radians, glm::vec3 axis) {
     m_rotation = m_rotation * glm::rotate(m_rotation, radians, axis);
 }
 
-void Wall::render(glm::mat4 MVP, glm::mat4 M) const {
+void Wall::render(glm::mat4 MVP, glm::mat4 M, glm::mat4 V, glm::mat4 invtransvm) const {
     glBindVertexArray(G_CUBE_VAO);
 
     auto new_mvp = MVP * m_translation * m_rotation * m_scaling;
     auto new_m = M * m_translation * m_rotation * m_scaling ;
+    auto new_invtransvm = glm::inverse(glm::transpose(V * new_m));
+
     glUniformMatrix4fv(G_MVP_ID, 1, GL_FALSE, &new_mvp[0][0]);
     glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &new_m[0][0]);
+    glUniformMatrix4fv(G_INVTRANSVM_ID, 1, GL_FALSE, &new_invtransvm[0][0]);
     glUniform1f(G_ALPHA_ID, m_alpha);
 
     // TODO: unhardcode 30
@@ -32,6 +35,7 @@ void Wall::render(glm::mat4 MVP, glm::mat4 M) const {
 
     glUniformMatrix4fv(G_MVP_ID, 1, GL_FALSE, &MVP[0][0]);
     glUniformMatrix4fv(G_M_ID, 1, GL_FALSE, &M[0][0]);
+    glUniformMatrix4fv(G_INVTRANSVM_ID, 1, GL_FALSE, &invtransvm[0][0]);
     glUniform1f(G_ALPHA_ID, 1.0);
 
     glBindVertexArray(0);
@@ -52,7 +56,7 @@ void Wall::step() {
             m_state = fading;
         }
     } else if (m_state == fading) {
-        m_alpha -= fade_step; 
+        //m_alpha -= fade_step; 
         if (m_alpha < 0) {
             m_state = removed;
         }

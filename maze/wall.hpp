@@ -17,7 +17,7 @@ enum wall_state {
 
 class Wall {
 public:
-    void render(glm::mat4 MVP, glm::mat4 M) const;
+    void render(glm::mat4 MVP, glm::mat4 M, glm::mat4 V, glm::mat4 invtransvm) const;
     void step();
 
     void translate(float x, float y, float z);

@@ -15,12 +15,12 @@ Cell::Cell(int row, int col):
     m_wall_bitmask = NORTH | SOUTH | EAST | WEST;
 }
 
-void Cell::render(glm::mat4 MVP, glm::mat4 M) const {
+void Cell::render(glm::mat4 MVP, glm::mat4 M, glm::mat4 V, glm::mat4 invtransvm) const {
     if (w_wall.isVisible()) {
-        w_wall.render(MVP, M);
+        w_wall.render(MVP, M, V, invtransvm);
     }
     if (n_wall.isVisible()) {
-        n_wall.render(MVP, M);
+        n_wall.render(MVP, M, V, invtransvm);
     }
 }
 
