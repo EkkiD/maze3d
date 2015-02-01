@@ -56,7 +56,7 @@ void Wall::step() {
             m_state = fading;
         }
     } else if (m_state == fading) {
-        //m_alpha -= fade_step; 
+        m_alpha -= fade_step; 
         if (m_alpha < 0) {
             m_state = removed;
         }
